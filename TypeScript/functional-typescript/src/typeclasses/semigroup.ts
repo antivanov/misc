@@ -2,14 +2,14 @@ export interface Semigroup<T> {
   combine(x: T, y: T): T
 }
 
-class StringSemigroup implements Semigroup<String> {
+export class StringSemigroup implements Semigroup<String> {
   combine(x: string, y: string): string {
     return x.concat(y);
   }
 };
 const stringSemigroup: Semigroup<string> = new StringSemigroup();
 
-class NumberAdditionSemigroup implements Semigroup<number> {
+export class NumberAdditionSemigroup implements Semigroup<number> {
   combine(x: number, y: number): number {
     return x + y;
   }

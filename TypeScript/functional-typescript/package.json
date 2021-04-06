@@ -2,6 +2,7 @@
   "name": "functional-typescript",
   "version": "0.0.1",
   "description": "Demo of Typescript's functional capabilities",
+  "main": "src/index.js",
   "scripts": {
     "test": "ts-mocha -p ./tsconfig.json spec/**/**/*.spec.ts"
   },

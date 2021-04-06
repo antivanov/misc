@@ -1,18 +1,18 @@
-import { Semigroup, SemigroupInstances } from './semigroup';
+import { Semigroup, SemigroupInstances, StringSemigroup, NumberAdditionSemigroup } from './semigroup';
 
 export interface Monoid<T> extends Semigroup<T> {
   unit: T
 }
 
-const stringMonoid: Monoid<string> = {
-  ...SemigroupInstances.stringSemigroup,
-  unit: ''
-};
+class StringMonoid extends StringSemigroup {
+  unit = ''
+}
+const stringMonoid: Monoid<string> = new StringMonoid();
 
-const numberAdditionMonoid: Monoid<number> = {
-  ...SemigroupInstances.numberAdditionSemigroup,
-  unit: 0
-};
+class NumberAdditionMonoid extends NumberAdditionSemigroup {
+  unit = 0
+}
+const numberAdditionMonoid: Monoid<number> = new NumberAdditionMonoid();
 
 const numberMultiplicationMonoid: Monoid<number> = {
   ...SemigroupInstances.numberMultiplicationSemigroup,
@@ -21,7 +21,7 @@ const numberMultiplicationMonoid: Monoid<number> = {
 
 export function combineAll<T>(xs: Array<T>) {
   return (m: Monoid<T>) =>
-    xs.reduceRight((acc, cur) =>
+    xs.reduce((acc, cur) =>
       m.combine(acc, cur)
     , m.unit);
 }
